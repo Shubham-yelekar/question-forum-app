@@ -6,7 +6,7 @@ export default function Home() {
       <h1 className="text-3xl font-sans font-medium  ">Hello world!</h1>
       <p className="font-serif ">
         For you to init your SDK and interact with Appwrite services you need to
-        add a web platform to your project. To add a new platform
+        rgb(235, 224, 27)
       </p>
     </div>
   );
