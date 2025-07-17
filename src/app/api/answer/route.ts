@@ -46,7 +46,7 @@ export async function DELETE(request: NextRequest) {
       answerId
     );
 
-    const prefs = await users.getPrefs<UserPrefs>(answerId.authorId);
+    const prefs = await users.getPrefs<UserPrefs>(answer.authorId);
     await users.updatePrefs(answer.authorId, {
       reputation: Number(prefs.reputation) - 1,
     });
