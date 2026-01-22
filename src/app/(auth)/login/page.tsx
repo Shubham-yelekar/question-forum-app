@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { useAuthStore } from "@/store/Auth";
+import { useAuthStore } from "@/stores/Auth";
 import Link from "next/link";
 
 export default function Login() {

@@ -1,5 +1,5 @@
 import { useAuthStore } from "@/stores/Auth";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
