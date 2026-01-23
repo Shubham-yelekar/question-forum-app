@@ -37,7 +37,7 @@ export default async function createQuestionCollection() {
       true
     ),
   ]);
-  console.log("Question atrributes created");
+  console.log("Question attributes created");
   await Promise.all([
     databases.createIndex(
       db,

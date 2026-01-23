@@ -1,15 +1,16 @@
 import type { Metadata } from "next";
-import { Manrope, Newsreader } from "next/font/google";
+import { Work_Sans, Averia_Serif_Libre } from "next/font/google";
 import "./globals.css";
 
-const manropeSans = Manrope({
-  variable: "--font-manroape-sans",
+const workSans = Work_Sans({
+  variable: "--font-work-sans",
   subsets: ["latin"],
 });
 
-const newsreaderSerif = Newsreader({
-  variable: "--font-newsreader-serif",
+const newsreaderSerif = Averia_Serif_Libre({
+  variable: "--font-averia-serif",
   subsets: ["latin"],
+  weight: ["300", "400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -25,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${manropeSans.variable} ${newsreaderSerif.variable} antialiased`}
+        className={`${workSans.variable} ${newsreaderSerif.variable} antialiased`}
       >
         {children}
       </body>
