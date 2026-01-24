@@ -1,16 +1,16 @@
 import type { Metadata } from "next";
-import { Work_Sans, Averia_Serif_Libre } from "next/font/google";
+import { DM_Sans, DM_Serif_Display } from "next/font/google";
 import "./globals.css";
 
-const workSans = Work_Sans({
-  variable: "--font-work-sans",
+const DMSans = DM_Sans({
+  variable: "--font-dm-sans",
   subsets: ["latin"],
 });
 
-const newsreaderSerif = Averia_Serif_Libre({
-  variable: "--font-averia-serif",
+const DMDSerif = DM_Serif_Display({
+  variable: "--font-dm-serif",
   subsets: ["latin"],
-  weight: ["300", "400", "700"],
+  weight: ["400"],
 });
 
 export const metadata: Metadata = {
@@ -25,9 +25,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${workSans.variable} ${newsreaderSerif.variable} antialiased`}
-      >
+      <body className={`${DMSans.variable} ${DMDSerif.variable} antialiased`}>
         {children}
       </body>
     </html>

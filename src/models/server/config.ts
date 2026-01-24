@@ -2,7 +2,7 @@ import env from "@/app/conf";
 
 import { Avatars, Client, Databases, Storage, Users } from "node-appwrite";
 
-let client = new Client()
+const client = new Client()
   .setEndpoint(env.appwrite.endpoint)
   .setProject(env.appwrite.projectId)
   .setKey(env.appwrite.apiKey);

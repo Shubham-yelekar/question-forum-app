@@ -1,23 +1,32 @@
+"use client";
+
 import { useAuthStore } from "@/stores/Auth";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
+import React from "react";
 
-export default function Layout({ children }: { children: React.ReactNode }) {
-  const { session } = useAuthStore();
+const Layout = ({ children }: { children: React.ReactNode }) => {
+  const { session, hydrated } = useAuthStore();
   const router = useRouter();
 
-  useEffect(() => {
-    if (session) {
+  React.useEffect(() => {
+    if (hydrated && session) {
       router.push("/");
     }
-  }, [session, router]);
+  }, [hydrated, session, router]);
+
+  if (!hydrated) {
+    return null;
+  }
 
   if (session) {
     return null;
   }
+
   return (
-    <div className="">
-      <div>{children}</div>
+    <div className="relative flex min-h-screen flex-col items-center justify-center py-12 bg-emerald-300  bg-[url('/icon.png')]">
+      <div className="relative">{children}</div>
     </div>
   );
-}
+};
+
+export default Layout;
