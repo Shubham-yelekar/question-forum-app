@@ -7,7 +7,7 @@ import {
 import { databases, users } from "@/models/server/config"; // Import Appwrite database and user services
 import { UserPrefs } from "@/stores/Auth"; // Import user preferences type
 import { NextRequest, NextResponse } from "next/server"; // Import Next.js request and response utilities
-import { ID, Query } from "node-appwrite"; // Import Appwrite utilities for unique IDs and queries
+import { ID, Query, AppwriteException } from "node-appwrite"; // Import Appwrite utilities for unique IDs and queries
 
 export async function POST(request: NextRequest) {
   try {
@@ -26,19 +26,19 @@ export async function POST(request: NextRequest) {
       await databases.deleteDocument(
         db,
         voteCollection,
-        response.documents[0].$id // Delete the document using its ID
+        response.documents[0].$id, // Delete the document using its ID
       );
 
       // Fetch the question or answer associated with the vote
       const QuestionOrAnswer = await databases.getDocument(
         db,
         type === "question" ? questionCollection : answerCollection, // Determine the collection based on type
-        typeId
+        typeId,
       );
 
       // Fetch the author's preferences
       const authorPrefs = await users.getPrefs<UserPrefs>(
-        QuestionOrAnswer.authorId
+        QuestionOrAnswer.authorId,
       );
 
       // Update the author's reputation based on the previous vote status
@@ -61,19 +61,19 @@ export async function POST(request: NextRequest) {
           typeId,
           voteStatus,
           votedById,
-        }
+        },
       );
 
       // Fetch the question or answer associated with the vote
       const questionOrAnswer = await databases.getDocument(
         db,
         type === "question" ? questionCollection : answerCollection,
-        typeId
+        typeId,
       );
 
       // Fetch the author's preferences
       const authorPrefs = await users.getPrefs<UserPrefs>(
-        questionOrAnswer.authorId
+        questionOrAnswer.authorId,
       );
 
       // Update the author's reputation based on the new vote status
@@ -121,7 +121,7 @@ export async function POST(request: NextRequest) {
         },
         {
           status: 201,
-        }
+        },
       );
     }
 
@@ -131,7 +131,7 @@ export async function POST(request: NextRequest) {
         Query.equal("type", type),
         Query.equal("typeId", typeId),
         Query.equal("voteStatus", "upvoted"),
-        Query.equal("voteById", votedById), // Fix: Should be "votedById"
+        Query.equal("votedById", votedById), // Fix: Should be "votedById"
         Query.limit(1),
       ]),
       databases.listDocuments(db, voteCollection, [
@@ -154,17 +154,20 @@ export async function POST(request: NextRequest) {
       },
       {
         status: 200,
-      }
-    );
-  } catch (error: any) {
-    // Handle errors and return an appropriate response
-    return NextResponse.json(
-      {
-        error: error?.message || "Error in voting",
       },
-      {
-        status: error?.status || error?.code || 500,
-      }
     );
+  } catch (error: unknown) {
+    // Handle errors and return an appropriate response
+    let message = "Error in voting";
+    let status = 500;
+
+    if (error instanceof AppwriteException) {
+      message = error.message;
+      status = error.code ?? 500;
+    } else if (error instanceof Error) {
+      message = error.message;
+    }
+
+    return NextResponse.json({ message }, { status });
   }
 }

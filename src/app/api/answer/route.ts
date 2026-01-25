@@ -2,7 +2,7 @@ import { answerCollection, db } from "@/models/name";
 import { databases, users } from "@/models/server/config";
 import { UserPrefs } from "@/stores/Auth";
 import { NextRequest, NextResponse } from "next/server";
-import { ID } from "node-appwrite";
+import { ID, AppwriteException } from "node-appwrite";
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
         content: answer,
         authorId: authorId,
         questionId: questionId,
-      }
+      },
     );
 
     const prefs = await users.getPrefs<UserPrefs>(authorId);
@@ -23,15 +23,17 @@ export async function POST(request: NextRequest) {
       reputation: Number(prefs.reputation) + 1,
     });
     return NextResponse.json(response, { status: 201 });
-  } catch (error: any) {
-    return NextResponse.json(
-      {
-        error: error?.message || "Error creating answer",
-      },
-      {
-        status: error?.status || error?.code || 500,
-      }
-    );
+  } catch (error: unknown) {
+    let message = "Error creating answer";
+    let status = 500;
+
+    if (error instanceof AppwriteException) {
+      message = error.message;
+      status = error.code ?? 500;
+    } else if (error instanceof Error) {
+      message = error.message;
+    }
+    return NextResponse.json({ message }, { status });
   }
 }
 
@@ -43,7 +45,7 @@ export async function DELETE(request: NextRequest) {
     const response = await databases.deleteDocument(
       db,
       answerCollection,
-      answerId
+      answerId,
     );
 
     const prefs = await users.getPrefs<UserPrefs>(answer.authorId);
@@ -51,14 +53,17 @@ export async function DELETE(request: NextRequest) {
       reputation: Number(prefs.reputation) - 1,
     });
     return NextResponse.json({ data: response }, { status: 200 });
-  } catch (error: any) {
-    return NextResponse.json(
-      {
-        message: error?.message || "Error deleting answers",
-      },
-      {
-        status: error?.status || error?.code || 500,
-      }
-    );
+  } catch (error: unknown) {
+    let message = "Error deleting answers";
+    let status = 500;
+
+    if (error instanceof AppwriteException) {
+      message = error.message;
+      status = error.code ?? 500;
+    } else if (error instanceof Error) {
+      message = error.message;
+    }
+
+    return NextResponse.json({ message }, { status });
   }
 }
