@@ -1,7 +1,6 @@
 import env from "@/app/conf";
 
 import { Client, Account, Avatars, Databases, Storage } from "appwrite";
-console.log(env);
 
 const client = new Client()
   .setEndpoint(env.appwrite.endpoint)

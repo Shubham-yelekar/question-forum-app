@@ -3,7 +3,7 @@
 import React from "react";
 import { useAuthStore } from "@/stores/Auth";
 import Link from "next/link";
-import { Input } from "@/components/ui/input";
+import { Input } from "../../../components/ui/Input";
 import Image from "next/image";
 export default function Login() {
   const { login } = useAuthStore();

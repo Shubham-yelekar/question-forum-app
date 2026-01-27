@@ -2,7 +2,7 @@
 
 import { useAuthStore } from "@/stores/Auth";
 import React, { useState } from "react";
-import { Input } from "@/components/ui/input";
+import { Input } from "../../../components/ui/Input";
 import Link from "next/link";
 import Image from "next/image";
 const RegisterPage = () => {
