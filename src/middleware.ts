@@ -7,6 +7,27 @@ import getOrCreateStorage from "./models/server/storageSetup";
 // This function can be marked `async` if using `await` inside
 export async function middleware(request: NextRequest) {
   await Promise.all([getOrCreateDB(), getOrCreateStorage()]);
+
+  const pathname = request.nextUrl.pathname;
+  const isLoggedIn = Boolean(request.cookies.get("session"));
+
+  const isAuthRoute =
+    pathname.startsWith("/login") || pathname.startsWith("/register");
+
+  const isAppRoute =
+    pathname.startsWith("/home") ||
+    pathname.startsWith("/questions") ||
+    pathname.startsWith("/profile") ||
+    pathname.startsWith("/settings");
+
+  if (!isLoggedIn && isAppRoute) {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
+  if (isLoggedIn && isAppRoute) {
+    return NextResponse.redirect(new URL("/home", request.url));
+  }
+
   return NextResponse.next();
 }
 

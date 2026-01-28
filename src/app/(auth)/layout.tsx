@@ -23,7 +23,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center py-12 bg-emerald-300  bg-[url('/icon.png')]">
+    <div className="relative flex min-h-screen flex-col items-center justify-center py-12 ">
       <div className="relative">{children}</div>
     </div>
   );

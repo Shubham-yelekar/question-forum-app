@@ -2,7 +2,7 @@
 
 import { useAuthStore } from "@/stores/Auth";
 import React, { useState } from "react";
-import { Input } from "../../../components/ui/Input";
+import Input from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
 const RegisterPage = () => {
@@ -41,13 +41,11 @@ const RegisterPage = () => {
     setIsLoading(() => false);
   };
   return (
-    <div className="mx-auto w-full max-w-md rounded-2xl border border-solid border-white/30 bg-white p-4 shadow-input dark:bg-black md:rounded-2xl ">
-      <Image src={"/logo.png"} alt={"askly-logo"} width={120} height={120} />
-
-      <h1 className="mt-4 text-2xl font-semibold font-sans tracking-tighter">
-        Create your account
+    <div className="mx-auto w-full max-w-md  ">
+      <h1 className="my-4 text-4xl text-center font-serif tracking-tighter">
+        Sign up & <br /> create your profile.
       </h1>
-      <p className="min-w-86 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
+      <p className="min-w-86 max-w-sm text-sm text-center text-neutral-600 dark:text-neutral-300">
         If you already have an account,
         <Link href="/login" className="text-blue-500 hover:underline">
           Login
@@ -59,8 +57,8 @@ const RegisterPage = () => {
           {error}
         </p>
       )}
-      <form className="mt-4" onSubmit={handleSubmit}>
-        <div className="flex flex-col gap-2 ">
+      <form className="mt-4 font-sans shadow-2xl p-4" onSubmit={handleSubmit}>
+        <div className="flex flex-col gap-4 ">
           <label className="text-sm" htmlFor="firstname">
             First name
           </label>

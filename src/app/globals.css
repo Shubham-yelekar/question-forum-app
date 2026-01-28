@@ -50,7 +50,7 @@ body {
 
 p {
   /* color: #cfcfcf; */
-  font-family: var(--font-sans);
+  font-family: var(--font-dm-sans);
 }
 
 :root {

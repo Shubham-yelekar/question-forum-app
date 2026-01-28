@@ -3,7 +3,7 @@
 import React from "react";
 import { useAuthStore } from "@/stores/Auth";
 import Link from "next/link";
-import { Input } from "../../../components/ui/Input";
+import Input from "@/components/ui/input";
 import Image from "next/image";
 export default function Login() {
   const { login } = useAuthStore();
@@ -33,12 +33,11 @@ export default function Login() {
   };
 
   return (
-    <div className="mx-auto w-full max-w-md rounded-2xl border border-solid border-white/30 bg-white p-4 shadow-input dark:bg-black">
-      <Image src={"/logo.png"} alt={"askly-logo"} width={120} height={120} />
-      <h1 className="mt-4 text-2xl font-semibold font-sans tracking-tighter">
-        Login your account
+    <div className="mx-auto w-full max-w-md rounded-2xl  shadow-input">
+      <h1 className=" text-4xl my-5 font-serif text-center  tracking-tighter">
+        Welcome back! <br /> Login to your account.
       </h1>
-      <p className="min-w-86 max-w-sm text-sm text-neutral-600 dark:text-neutral-300">
+      <p className="min-w-86 mt-2 max-w-sm text-sm text-neutral-600 text-center dark:text-neutral-300">
         If dont have an account,
         <Link href="/register" className="text-blue-500 hover:underline">
           Register here
@@ -49,7 +48,10 @@ export default function Login() {
           {error}
         </p>
       )}
-      <form className="mt-4 flex flex-col gap-2" onSubmit={handleSubmit}>
+      <form
+        className="mt-4 flex flex-col p-4 shadow-2xl gap-4 font-sans"
+        onSubmit={handleSubmit}
+      >
         <label className="text-sm" htmlFor="email">
           Email
         </label>
