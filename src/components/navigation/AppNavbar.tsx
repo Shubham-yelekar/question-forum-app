@@ -12,7 +12,7 @@ const AppNavbar = () => {
     router.push("/login");
   };
   return (
-    <div className="sticky  border-b-1 solid bg-gray-300  z-10 inset-x-0 top-4 mx-auto max-w-[700px] h-fit flex align-center justify-between">
+    <div className="sticky  border-b-1 solid border-gray-300  z-10 inset-x-0 top-0 p-2 mx-auto max-w-[900px] h-fit flex align-center justify-between">
       <div>
         <Link href={"/"}>
           <Image

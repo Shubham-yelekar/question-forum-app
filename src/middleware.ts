@@ -10,7 +10,6 @@ export async function middleware(request: NextRequest) {
 
   const pathname = request.nextUrl.pathname;
   const isLoggedIn = Boolean(request.cookies.get("session"));
-  console.log(pathname);
 
   const isAuthRoute =
     pathname.startsWith("/login") || pathname.startsWith("/register");
@@ -21,14 +20,10 @@ export async function middleware(request: NextRequest) {
     pathname.startsWith("/profile");
 
   if (!isLoggedIn && isAppRoute) {
-    console.log("!isLoggedIn && isAppRoute");
-
     return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (isLoggedIn && isAuthRoute) {
-    console.log("isLoggedIn && isAuthRoute");
-
     return NextResponse.redirect(new URL("/home", request.url));
   }
 

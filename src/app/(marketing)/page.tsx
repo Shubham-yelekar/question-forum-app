@@ -1,4 +1,11 @@
-export default function Home() {
+"use client";
+
+import { useAuthStore } from "@/stores/Auth";
+import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
+import Link from "next/link";
+export default function page() {
+  const { user } = useAuthStore();
+
   return (
     <div className="max-w-[700px] m-auto flex flex-col items-center gap-12  mt-64">
       <div className="flex flex-col gap-4">
@@ -10,14 +17,37 @@ export default function Home() {
           with the most (in)credible people.
         </p>
       </div>
-      <div className="flex justify-center gap-4">
-        <button className="flex items-center font-semibold border transition-all ease-in duration-75 whitespace-nowrap text-center select-none gap-x-1 active:shadow-none font-sans text-sm leading-5 rounded-xl py-2  px-6 text-gray-900 bg-gray-100 border-gray-300  hover:bg-gray-200">
-          Log In
-        </button>
-        <button className="flex items-center font-semibold border transition-all ease-in duration-75 font-sans whitespace-nowrap text-center select-none gap-x-1 active:shadow-none text-sm leading-5 rounded-xl py-2 px-6 bg-emerald-500 text-white border-emerald-600   hover:bg-emerald-600">
-          Register
-        </button>
-      </div>
+      {user && (
+        <div className="flex justify-center gap-4">
+          <Link href={"/home"}>
+            <button className="flex items-center font-semibold transition-all ease-in duration-75 whitespace-nowrap text-center select-none gap-x-1 active:shadow-none font-sans text-sm leading-5 rounded-xl py-2  px-6 text-gray-900  hover:bg-gray-200">
+              Home
+            </button>
+          </Link>
+          <Link href={"/profile"}>
+            <button className="flex items-center justify- font-semibold border transition-all ease-in duration-75 font-sans whitespace-nowrap text-center select-none gap-x-1 active:shadow-none text-sm leading-5 rounded-xl py-1.5 px-2  text-foreground border-emerald-400   hover:bg-emerald-100">
+              <Avatar size="sm">
+                <AvatarImage
+                  src="https://github.com/shadcn.png"
+                  alt="@shadcn"
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              Profile
+            </button>
+          </Link>
+        </div>
+      )}
+      {!user && (
+        <div className="flex justify-center gap-4">
+          <button className="flex items-center font-semibold border transition-all ease-in duration-75 whitespace-nowrap text-center select-none gap-x-1 active:shadow-none font-sans text-sm leading-5 rounded-xl py-2  px-6 text-gray-900 bg-gray-100 border-gray-300  hover:bg-gray-200">
+            Log In
+          </button>
+          <button className="flex items-center font-semibold border transition-all ease-in duration-75 font-sans whitespace-nowrap text-center select-none gap-x-1 active:shadow-none text-sm leading-5 rounded-xl py-2 px-6 bg-emerald-500 text-white border-emerald-600   hover:bg-emerald-600">
+            Register
+          </button>
+        </div>
+      )}
     </div>
   );
 }
