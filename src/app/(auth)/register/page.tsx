@@ -5,6 +5,7 @@ import React, { useState } from "react";
 import Input from "@/components/ui/input";
 import Link from "next/link";
 import Image from "next/image";
+import Avatars from "@/components/Avatars";
 const RegisterPage = () => {
   const { createAccount, login } = useAuthStore();
   const [isLoading, setIsLoading] = useState(false);
@@ -42,6 +43,7 @@ const RegisterPage = () => {
   };
   return (
     <div className="mx-auto w-full max-w-md  ">
+      <Avatars />
       <h1 className="my-4 text-4xl text-center font-serif tracking-tighter">
         Sign up & <br /> create your profile.
       </h1>

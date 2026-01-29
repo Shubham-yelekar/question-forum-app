@@ -3,12 +3,14 @@
 import React from "react";
 import { useAuthStore } from "@/stores/Auth";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Input from "@/components/ui/input";
 import Image from "next/image";
 export default function Login() {
   const { login } = useAuthStore();
   const [isLoading, setIsLoading] = React.useState(false);
   const [error, setError] = React.useState("");
+  const router = useRouter();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -30,6 +32,7 @@ export default function Login() {
     }
 
     setIsLoading(() => false);
+    router.push("/home");
   };
 
   return (

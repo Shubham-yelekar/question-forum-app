@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { persist } from "zustand/middleware";
-
+import Cookies from "js-cookie";
 import { AppwriteException, ID, Models } from "appwrite";
 import { account } from "@/models/client/config";
 
@@ -71,6 +71,12 @@ export const useAuthStore = create<IAuthStore>()(
               reputation: 0,
             });
 
+          Cookies.set("session", session.$id, {
+            expires: 1,
+            secure: true,
+            sameSite: "lax",
+          });
+
           set({ session, user, jwt });
 
           return { success: true };
@@ -99,6 +105,8 @@ export const useAuthStore = create<IAuthStore>()(
       async logout() {
         try {
           await account.deleteSessions();
+          Cookies.remove("session");
+
           set({ session: null, jwt: null, user: null });
         } catch (error) {
           console.log(error);
