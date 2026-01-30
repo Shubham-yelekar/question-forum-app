@@ -5,7 +5,7 @@ import { useAuthStore } from "@/stores/Auth";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import Input from "@/components/ui/input";
-import Image from "next/image";
+
 export default function Login() {
   const { login } = useAuthStore();
   const [isLoading, setIsLoading] = React.useState(false);
