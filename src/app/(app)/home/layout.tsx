@@ -36,16 +36,21 @@ const layout = ({ children }: { children: React.ReactNode }) => {
       <div className="grid grid-cols-12  ">
         {/* Left Sidebar */}
         <aside className="col-span-3 hidden lg:block sticky top-14 h-fit">
-          <div className="flex flex-col border-b border-gray-300">
+          <div className="flex flex-col border-b ">
             {LeftAsideLinks.map((items) => (
               <Link
                 key={`${items.name}-${items.url} `}
                 href={items.url}
                 className="w-full p-2 cursor-pointer "
               >
-                <button className="flex items-center cursor-pointer font-semibold  transition-all ease-in duration-75 font-sans whitespace-nowrap  select-none gap-x-2  text-sm leading-5 p-3 w-full rounded-xl  hover:bg-emerald-100">
-                  <items.icon size={18} />
-                  {items.name}
+                <button className="group flex items-center cursor-pointer font-regular transition-all ease-in duration-75 font-sans whitespace-nowrap  select-none gap-x-2  text-sm leading-5 p-3 w-full rounded-xl  hover:bg-accent ">
+                  <items.icon
+                    size={18}
+                    className="text-secondary group-hover:text-primary"
+                  />
+                  <span className=" text-secondary group-hover:text-primary">
+                    {items.name}
+                  </span>
                 </button>
               </Link>
             ))}
@@ -53,7 +58,7 @@ const layout = ({ children }: { children: React.ReactNode }) => {
         </aside>
 
         {/* Main Feed */}
-        <main className="col-span-12 border-x-1 border-gray-300 lg:col-span-6 space-y-6">
+        <main className="col-span-12 border-x-1  lg:col-span-6 space-y-6">
           {children}
         </main>
 

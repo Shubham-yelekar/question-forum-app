@@ -1,5 +1,6 @@
 "use client";
 
+import Navbar from "@/components/navigation/Navbar";
 import { useAuthStore } from "@/stores/Auth";
 import { useRouter } from "next/navigation";
 import React from "react";
@@ -22,10 +23,13 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
     return null;
   }
 
-  return (
+  return (<>
+        <Navbar />
     <div className="relative flex min-h-screen flex-col items-center justify-center py-12 ">
-      <div className="relative">{children}</div>
+      <div className="relative">
+        {children}</div>
     </div>
+  </>
   );
 };
 

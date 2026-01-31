@@ -13,7 +13,7 @@ export default function page() {
         <h1 className="text-5xl tracking-tight text-center font-serif font-normal ">
           The Professional Network <br /> for builders to show & tell!
         </h1>
-        <p className="font-sans text-center text-xl text-gray-600">
+        <p className="font-sans text-center text-secondary ">
           Showcase your work, launch projects, find jobs, and connect <br />{" "}
           with the most (in)credible people.
         </p>
@@ -21,7 +21,7 @@ export default function page() {
       {user && (
         <div className="flex justify-center gap-4">
           <Link href={"/home"}>
-            <button className="flex items-center font-semibold transition-all ease-in duration-75 whitespace-nowrap text-center select-none gap-x-1 active:shadow-none font-sans text-sm leading-5 rounded-xl py-2  px-6 text-gray-900  hover:bg-gray-200">
+            <button className="flex items-center font-semibold transition-all ease-in duration-75 whitespace-nowrap text-center select-none gap-x-1 active:shadow-none font-sans text-sm leading-5 rounded-xl bg-background shadow-2xl py-2 px-6 hover:shadow-lg">
               Home
             </button>
           </Link>
@@ -42,12 +42,12 @@ export default function page() {
       {!user && (
         <div className="flex justify-center gap-4">
           <Link href={"/login"}>
-            <button className="flex items-center font-semibold border transition-all ease-in duration-75 whitespace-nowrap text-center select-none gap-x-1 active:shadow-none font-sans text-sm leading-5 rounded-xl py-2  px-6 text-gray-900 bg-gray-100 border-gray-300  hover:bg-gray-200">
+            <button className="flex items-center font-semibold border transition-all ease-in duration-75 whitespace-nowrap text-center select-none gap-x-1 active:shadow-none font-sans text-sm leading-5 rounded-xl bg-background shadow-2xl py-2 px-6 hover:shadow-lg  ">
               Log In
             </button>
           </Link>
           <Link href={"/register"}>
-            <button className="flex items-center font-semibold border transition-all ease-in duration-75 font-sans whitespace-nowrap text-center select-none gap-x-1 active:shadow-none text-sm leading-5 rounded-xl py-2 px-6 bg-emerald-500 text-white border-emerald-600   hover:bg-emerald-600">
+            <button className="flex items-center font-semibold transition-all ease-in duration-75 font-sans whitespace-nowrap text-center select-none gap-x-1 active:shadow-none text-sm leading-5 rounded-xl py-2 px-6  bg-primary text-primary-foreground shadow-2xl  hover:shadow-lg">
               Register
             </button>
           </Link>

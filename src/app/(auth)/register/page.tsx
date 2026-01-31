@@ -54,12 +54,10 @@ const RegisterPage = () => {
         </Link>{" "}
       </p>
 
-      {error && (
-        <p className=" absolute text-center text-sm text-red-500 dark:text-red-400">
-          {error}
-        </p>
-      )}
-      <form className="mt-4 font-sans shadow-2xl p-4" onSubmit={handleSubmit}>
+      <form
+        className="mt-4 font-sans p-4 shadow-2xl rounded-xl gap-4 bg-card border"
+        onSubmit={handleSubmit}
+      >
         <div className="flex flex-col gap-4 ">
           <label className="text-sm" htmlFor="firstname">
             First name
@@ -110,13 +108,18 @@ const RegisterPage = () => {
           />
         </div>
         <button
-          className="group/btn mt-2 relative block h-10 w-full rounded-md bg-gradient-to-br from-black to-neutral-600 font-medium text-white shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:bg-zinc-800 dark:from-zinc-900 dark:to-zinc-900 dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+          className="group/btn mt-2 relative block h-10 w-full font-medium  text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/80"
           type="submit"
           disabled={isLoading}
         >
           Sign up &rarr;
         </button>{" "}
       </form>
+      {error && (
+        <p className=" absolute -bottom-12 text-center text-sm text-destructive dark:text-destructive">
+          {error}
+        </p>
+      )}
     </div>
   );
 };
