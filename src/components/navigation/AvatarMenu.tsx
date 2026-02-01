@@ -9,7 +9,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { BadgeCheckIcon, BellIcon, LogOutIcon } from "lucide-react";
+import { BadgeCheckIcon, BellIcon, LogOutIcon, HomeIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuthStore } from "@/stores/Auth";
@@ -34,6 +34,18 @@ export function AvatarMenu() {
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
         <DropdownMenuGroup>
+          <Link href={"/profile"}>
+            <DropdownMenuItem>
+              <BadgeCheckIcon />
+              Profile
+            </DropdownMenuItem>
+          </Link>
+          <Link href={"/home"}>
+            <DropdownMenuItem>
+              <HomeIcon />
+              Home
+            </DropdownMenuItem>
+          </Link>
           <Link href={"/profile"}>
             <DropdownMenuItem>
               <BadgeCheckIcon />

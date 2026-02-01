@@ -20,7 +20,7 @@ const Navbar = () => {
             </button>
           </Link>
           <Link href={"/profile"}>
-            <button className="flex items-center justify- font-semibold border transition-all ease-in duration-75 font-sans whitespace-nowrap text-center select-none gap-x-1 active:shadow-none text-sm leading-5 rounded-xl py-1.5 px-2  text-foreground border-emerald-400   hover:bg-emerald-100">
+            <button className="flex items-center justify- font-semibold border transition-all ease-in duration-75 font-sans whitespace-nowrap text-center select-none gap-x-1 active:shadow-none text-sm leading-5 rounded-xl py-1.5 px-2  text-foreground ">
               <Avatar size="sm">
                 <AvatarImage
                   src="https://github.com/shadcn.png"
