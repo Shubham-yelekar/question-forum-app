@@ -1,4 +1,4 @@
-import QuestionForm from "@/components/navigation/QuestionForm";
+import QuestionForm from "@/components/app-ui/QuestionForm";
 import React from "react";
 
 const page = () => {

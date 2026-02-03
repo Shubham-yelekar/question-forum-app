@@ -24,7 +24,11 @@ import type {
   ControllerRenderProps,
 } from "react-hook-form";
 
+import dynamic from "next/dynamic";
+import { Suspense } from "react";
 type Schema = z.infer<typeof formSchema>;
+
+const EditorComp = dynamic(() => import("./Editor"), { ssr: false });
 
 const QuestionForm = () => {
   const form = useForm<Schema>({
@@ -48,23 +52,26 @@ const QuestionForm = () => {
       <form onSubmit={handleSubmit} className="w-full gap-2 my-4">
         <FieldGroup className="grid md:grid-cols-6 gap-4 mb-6">
           <Controller
-            name="input-a84"
+            name="title"
             control={form.control}
             render={({ field, fieldState }) => (
               <Field
                 data-invalid={fieldState.invalid}
                 className="gap-1 col-span-full"
               >
-                <FieldLabel htmlFor="input-a84">Input Field </FieldLabel>
+                <FieldLabel htmlFor="input-a84">Title</FieldLabel>
+                <FieldDescription>
+                  Keep it clean and to the point
+                </FieldDescription>
                 <Input
                   {...field}
-                  id="input-a84"
+                  id="title"
                   type="text"
                   onChange={(e) => {
                     field.onChange(e.target.value);
                   }}
                   aria-invalid={fieldState.invalid}
-                  placeholder="Enter your text"
+                  placeholder="Title of your question"
                 />
 
                 {fieldState.invalid && (
@@ -74,6 +81,32 @@ const QuestionForm = () => {
             )}
           />
         </FieldGroup>
+        <FieldGroup className="grid md:grid-cols-6 gap-4 mb-6">
+          <Controller
+            name="body"
+            control={form.control}
+            render={() => (
+              <Field className="gap-1 col-span-full">
+                <FieldLabel htmlFor="input-a84">Title</FieldLabel>
+                <FieldDescription>
+                  Keep it clean and to the point
+                </FieldDescription>
+                <Suspense fallback={null}>
+                  <EditorComp
+                    markdown={`
+Hello **world**!
+`}
+                  />
+                </Suspense>
+              </Field>
+            )}
+          />
+        </FieldGroup>
+        <div className="flex justify-end items-center w-full">
+          <Button disabled={isSubmitting}>
+            {isSubmitting ? "Submitting..." : "Submit"}
+          </Button>
+        </div>
       </form>
     </div>
   );

@@ -9,8 +9,8 @@ export interface ActionResponse<T = any> {
   inputs?: T;
 }
 export const formSchema = z.object({
-  "input-a84": z.string({ error: "This field is required" }).optional(),
-  "textarea-247": z.string({ error: "This field is required" }).optional(),
+  title: z.string({ error: "This field is required" }).optional(),
+  body: z.string({ error: "This field is required" }).optional(),
   //   "fileupload-fa6": z
   //     .union([
   //       z.file().mime(["image/png", "image/jpeg", "image/gif"]).max(5242880),
