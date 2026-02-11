@@ -193,3 +193,120 @@ p {
     @apply bg-background text-foreground;
   }
 }
+
+/* Toolbar container */
+.mdxeditor-toolbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 6px 8px;
+
+  background: var(--background);
+}
+
+/* Toolbar buttons */
+.mdxeditor-toolbar button {
+  height: 32px;
+  width: 32px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  border-radius: 6px;
+  color: var(--accent-foreground);
+
+  transition: all 0.15s ease;
+}
+
+/* Hover */
+.mdxeditor-toolbar button:hover {
+  background: var(--background);
+  color: var(--accent-foreground);
+}
+
+/* Active / toggled */
+.mdxeditor-toolbar button[data-state="on"] {
+  background: var(--accent);
+  color: var(--accent-foreground);
+}
+
+/* Disabled */
+.mdxeditor-toolbar button:disabled {
+  opacity: 0.4;
+}
+
+.mdxeditor-toolbar svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mdxeditor-root-contenteditable {
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--foreground);
+}
+
+.mdxeditor-root-contenteditable [role="textbox"] {
+  min-height: 200px;
+  height: auto;
+  border-radius: 12px;
+  padding: 8px;
+}
+
+.mdxeditor-root-contenteditable [role="textbox"]:focus-visible {
+  outline: 1px dotted var(--border);
+}
+
+.mdxeditor-toolbar {
+  backdrop-filter: blur(6px);
+  background: var(--accent);
+  border-radius: 12px;
+}
+
+.mdxeditor-toolbar [role="separator"] {
+  width: 1px;
+  height: 18px;
+  background: var(--border);
+  margin: 0 4px;
+}
+
+.mdxeditor-root-contenteditable:empty::before {
+  content: "Describe your problem in detail…";
+  color: var(--muted-foreground);
+  pointer-events: none;
+}
+.toolbar {
+  display: flex;
+}
+
+.toolbar div {
+  display: inline-flex;
+}
+
+.mdxeditor-link-dialog {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  padding: 16px;
+  width: 280px;
+}
+
+.mdxeditor-link-dialog input {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  color: var(--foreground);
+  font-size: 14px;
+}
+
+.mdxeditor-link-dialog button {
+  background: var(--primary);
+  color: var(--primary-foreground);
+  border-radius: 8px;
+  padding: 6px 12px;
+}

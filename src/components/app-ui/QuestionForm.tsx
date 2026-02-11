@@ -32,19 +32,18 @@ const EditorComp = dynamic(() => import("./Editor"), { ssr: false });
 
 const QuestionForm = () => {
   const form = useForm<Schema>({
-    resolver: zodResolver(formSchema as any),
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      title: "",
+      body: "",
+    },
   });
   const {
-    formState: { isSubmitting, isSubmitSuccessful },
+    formState: { isSubmitting },
   } = form;
-  const handleSubmit = form.handleSubmit(async (data: Schema) => {
-    try {
-      // TODO: implement form submission
-      console.log(data);
-      form.reset();
-    } catch (error) {
-      // TODO: handle error
-    }
+  const handleSubmit = form.handleSubmit(async (data) => {
+    console.log(data);
+    form.reset();
   });
   return (
     <div>
@@ -85,19 +84,18 @@ const QuestionForm = () => {
           <Controller
             name="body"
             control={form.control}
-            render={() => (
+            render={({ field, fieldState }) => (
               <Field className="gap-1 col-span-full">
-                <FieldLabel htmlFor="input-a84">Title</FieldLabel>
+                <FieldLabel htmlFor="input-a84">Description</FieldLabel>
                 <FieldDescription>
                   Keep it clean and to the point
                 </FieldDescription>
                 <Suspense fallback={null}>
-                  <EditorComp
-                    markdown={`
-Hello **world**!
-`}
-                  />
+                  <EditorComp value={field.value} onChange={field.onChange} />
                 </Suspense>
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
               </Field>
             )}
           />
