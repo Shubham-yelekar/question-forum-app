@@ -4,10 +4,11 @@ import { useAuthStore } from "@/stores/Auth";
 import React, { useState } from "react";
 import Input from "@/components/ui/input";
 import Link from "next/link";
-import Image from "next/image";
 import Avatars from "@/components/Avatars";
+import { useRouter } from "next/navigation";
 const RegisterPage = () => {
   const { createAccount, login } = useAuthStore();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,6 +37,8 @@ const RegisterPage = () => {
       const loginRespones = await login(email.toString(), password.toString());
       if (loginRespones.error) {
         setError(() => loginRespones.error!.message);
+      } else {
+        router.push("/home");
       }
     }
 

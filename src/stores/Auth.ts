@@ -49,10 +49,16 @@ export const useAuthStore = create<IAuthStore>()(
 
       async verifySession() {
         try {
-          const session = await account.getSession("current");
-          set({ session });
+          const [session, user, { jwt }] = await Promise.all([
+            account.getSession("current"),
+            account.get<UserPrefs>(),
+            account.createJWT(),
+          ]);
+          set({ session, user, jwt });
         } catch (error) {
           console.log(error);
+          Cookies.remove("session");
+          set({ session: null, user: null, jwt: null });
         }
       },
 
@@ -73,7 +79,7 @@ export const useAuthStore = create<IAuthStore>()(
 
           Cookies.set("session", session.$id, {
             expires: 1,
-            secure: true,
+            secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
           });
 
@@ -117,7 +123,10 @@ export const useAuthStore = create<IAuthStore>()(
       name: "auth",
       onRehydrateStorage() {
         return (state, error) => {
-          if (!error) state?.setHydrated();
+          if (!error) {
+            state?.setHydrated();
+            state?.verifySession();
+          }
         };
       },
     },

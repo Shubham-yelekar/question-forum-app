@@ -11,7 +11,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
   React.useEffect(() => {
     if (hydrated && session) {
-      router.push("/");
+      router.push("/home");
     }
   }, [hydrated, session, router]);
 

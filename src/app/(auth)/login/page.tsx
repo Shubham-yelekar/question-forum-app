@@ -29,6 +29,8 @@ export default function Login() {
     const loginResponse = await login(email.toString(), password.toString());
     if (loginResponse.error) {
       setError(() => loginResponse.error!.message);
+      setIsLoading(() => false);
+      return;
     }
 
     setIsLoading(() => false);
